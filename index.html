@@ -16,12 +16,16 @@
 <!--</body>-->
 
 <body>
-<h3>Using Template Literal and InnerHTML</h3>
+<h3>Chemische Formule Parser</h3>
 <div class="container">
-    <button class="add-button" onclick="addFn()">Add Input Fields</button>
     <div id="inputFields">
+        <div class="input-group">
+            <input type="text" placeholder="Voer formule in" class="input-field" oninput="parseFormula(this)">
+            <label class="output-label"></label>
+        </div>
     </div>
+    <button class="add-button" onclick="addFn()">Voeg veld toe</button>
 </div>
-<script src="scripts/index.js"></script>
+<script src="scripts/formula_parser.js"></script>
 </body>
 </html>
