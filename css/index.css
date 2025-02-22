@@ -29,3 +29,6 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+.lhv-label {
+    margin-left: 10px; /* Voeg wat ruimte toe tussen de labels */
+}

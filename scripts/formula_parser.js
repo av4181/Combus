@@ -1,5 +1,17 @@
-// Javascript program to parse the molecule
-// and get the atoms count
+/*
+Inladen json file voor LHV data.  Data
+ */
+fetch("producten.json")
+    .then(response => response.json())
+    .then(jsonData => {
+        lhvData = jsonData;
+    });
+
+
+/*
+ Source: geeksforgeeks
+ Javascript program to parse the molecule and get the atoms count
+ */
 function get_count(s) {
 // Use Map to store elements in insertion order
     let mp = new Map();
@@ -66,11 +78,26 @@ function get_count(s) {
 
     return mp;
 }
+/* TEST get_count()
+let str = "Fe2H3OH";
+console.log("Given molecule:", str);
+get_count(str);
+*/
 
-// TEST get_count()
-// let str = "Fe2H3OH";
-// console.log("Given molecule:", str);
-// get_count(str);
+/*
+Opzoeken LHV waarde in producten.json
+ */
+
+function findLHV(formula) {
+    // Zoek de formule in de JSON-data
+    for (let i = 0; i < lhvData.length; i++) {
+        const component = lhvData[i].find(component => component.Formula === formula);
+        if (component) {
+            return component["WOTAN LHV"];
+        }
+    }
+    return null; // Formule niet gevonden
+}
 
 /*
 Functies om extra inputveld toe te voegen met knop.  Toevoegen extra <div>
@@ -81,6 +108,7 @@ function addFn() {
         <div class="input-group">
             <input type="text" placeholder="Voer formule in" class="input-field" oninput="parseFormula(this)">
             <label class="output-label"></label>
+            <label class="lhv-label"></label> 
         </div>
     `;
 }
@@ -95,6 +123,21 @@ function parseFormula(inputField) {
     //... (roep hier je get_count functie aan en formatteer de output)...
     const elementCount = get_count(formula); // Aanpassen aan je get_count functie
     outputLabel.textContent = formatOutput(elementCount); // formatOutput functie moet nog gedefinieerd worden
+
+    // Zoek de LHV-waarde op
+    const lhvValue = findLHV(formula);
+    const lhvLabel = inputField.nextElementSibling.nextElementSibling; // Pak het LHV label
+    if (lhvValue) {
+        lhvLabel.textContent = `LHV: ${lhvValue}`; // Toon de LHV waarde in het label
+    } else {
+        lhvLabel.textContent = ""; // Leeg het label als er geen LHV is gevonden
+    }
+
+    // Voeg het LHV label toe naast het input veld
+    const inputGroup = inputField.parentNode;
+    inputGroup.insertBefore(lhvLabel, outputLabel);
+
+    elementCount.clear();
 }
 
 /*
@@ -107,3 +150,6 @@ function formatOutput(elementCount) {
     }
     return output.slice(0, -2); // Verwijder laatste komma en spatie
 }
+
+
+
