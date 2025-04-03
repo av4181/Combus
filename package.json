@@ -1,0 +1,21 @@
+{
+  "name": "combus",
+  "version": "1.0.0",
+  "description": "A javascript project for stochiometric combustion calculation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/av4181/Combus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/av4181/Combus/issues"
+  },
+  "homepage": "https://github.com/av4181/Combus#readme"
+}
